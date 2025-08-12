@@ -1,8 +1,32 @@
 <!doctype html>
 <html>
 <head>
+  <script>
+    function log(txt) {
+      let el = document.createElement("div");
+      el.textContent = txt;
+      document.getElementById("output").appendChild(el);
+    }
+
+    function readClick() {
+      log(`current cookies: ${document.cookie}`);
+    }
+
+    function writeClick() {
+      let value = Math.floor(Math.random() * 100);
+      log(`writing cookie: value=${value}`);
+      document.cookie = `value=${value}`;
+    }
+
+    self.addEventListener("load", _ => {
+      document.getElementById("button-read").addEventListener("click", readClick);
+      document.getElementById("button-write").addEventListener("click", writeClick);
+    });
+  </script>
 </head>
 <body>
-Hello world 2
+  <button type="button" id="button-read">Read cookies</button>
+  <button type="button" id="button-write">Write cookies</button>
+  <div id="output"></div>
 </body>
 </html>
